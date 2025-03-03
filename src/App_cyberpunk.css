@@ -1,0 +1,318 @@
+:root {
+  --neon-cyan: #0ff;
+  --neon-pink: #f0f;
+  --matrix-green: #0f0;
+  --dark-bg: #0a0a12;
+  --pink-border: 2px solid var(#FF69B4);
+}
+
+body {
+  margin: 0;
+}
+
+.ribbon-cursor {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 32 32'%3E%3Ctext y='20'%3E🎀%3C/text%3E%3C/svg%3E"), pointer !important;
+}
+
+/* Make sure the upload box cursor takes precedence */
+.upload-box.ribbon-cursor,
+.upload-box.ribbon-cursor * {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 32 32'%3E%3Ctext y='20'%3E🎀%3C/text%3E%3C/svg%3E"), pointer !important;
+}
+
+/* Ensure this applies to the hidden input as well */
+.ribbon-cursor .hidden-input {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 32 32'%3E%3Ctext y='20'%3E🎀%3C/text%3E%3C/svg%3E"), pointer !important;
+}
+
+#app {
+  height: 100vh;
+  position: relative;
+}
+
+/* Particle Background */
+.canvas-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  filter: blur(1px);
+}
+
+.canvas-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(0, 255, 255, 0.1) 0%, rgba(255, 0, 255, 0.1) 100%);
+}
+
+/* Cyberpunk Title */
+.cyber-title {
+  text-align: center;
+  font-size: 4rem;
+  margin: 2rem 0;
+  position: relative;
+  color: #F4C2C2;
+  text-shadow: 0 0 10px maroon;
+}
+
+.glitch {
+  position: relative;
+  animation: glitch 5s infinite;
+}
+
+.glitch span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--neon-pink);
+}
+
+.glitch span:nth-child(1) { clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); }
+.glitch span:nth-child(2) { clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%); }
+.glitch span:nth-child(3) { clip-path: polygon(25% 0, 75% 0, 75% 100%, 25% 100%); }
+
+/* Upload Section */
+.upload-container {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0;
+}
+
+.upload-box {
+  border: var(--pink-border);
+  width: 500px;
+  height: 300px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.upload-box:hover {
+  box-shadow: 0 0 30px var(--neon-cyan);
+  transform: scale(1.02);
+}
+
+.upload-box.drag-over {
+  border-color: var(--neon-pink);
+  background: rgba(255, 0, 255, 0.1);
+}
+
+.upload-content {
+  text-align: center;
+}
+
+.upload-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1rem;
+  fill: #E75480;
+  filter: drop-shadow(0 0 10px var(--neon-cyan));
+}
+
+.upload-text {
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.upload-subtext {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.neon-text {
+  color: pink;
+  text-shadow: 0 0 10px #AA336A;
+}
+
+/* Processing Animation */
+.processing-container {
+  text-align: center;
+  margin-top: 5rem;
+}
+
+.scan-animation {
+  width: 400px;
+  height: 200px;
+  margin: 0 auto 2rem;
+  border: var(--pink-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.laser-beam {
+  position: absolute;
+  height: 100%;
+  width: 4px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--neon-pink) 50%,
+    transparent 100%
+  );
+  animation: scan 2s infinite linear;
+}
+
+.document-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 60%);
+  animation: pulse 2s infinite;
+}
+
+.loading-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background: var(--neon-cyan);
+  border-radius: 50%;
+  animation: bounce 1s infinite;
+}
+
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
+
+.neon-pulse {
+  animation: neon-pulse 1.5s infinite;
+}
+
+/* Terminal Footer */
+.cyber-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.8);
+  border-top: var(--pink-border);
+}
+
+.hacker-terminal {
+  font-family: 'Roboto Mono', monospace;
+  color: var(--matrix-green);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.terminal-prompt {
+  color: var(--neon-cyan);
+}
+
+.terminal-text::after {
+  content: '_';
+  animation: blink 1s infinite;
+}
+
+/* Animations */
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+}
+
+@keyframes scan {
+  0% { left: -10%; }
+  100% { left: 110%; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes neon-pulse {
+  0%, 100% { text-shadow: 0 0 10px var(--neon-cyan); }
+  50% { text-shadow: 0 0 20px var(--neon-cyan), 0 0 30px var(--neon-cyan); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Transitions */
+.fade-scale-enter-active,
+.fade-scale-leave-active {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-scale-enter-from,
+.fade-scale-leave-to {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0.3s ease;
+}
+
+.slide-up-enter-from,
+.slide-up-leave-to {
+  transform: translateY(100%);
+}
+
+/* Utility Classes */
+.hidden-input {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .cyber-title {
+    font-size: 2.5rem;
+  }
+  
+  .upload-box {
+    width: 90%;
+    height: 250px;
+  }
+  
+  .scan-animation {
+    width: 90%;
+  }
+}
+
+.content-container {
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.main-content {
+  position: relative;
+  z-index: 2;
+}
+
+.upload-box {
+  background: rgba(0, 0, 0, 0.7) !important;
+  backdrop-filter: blur(5px);
+}

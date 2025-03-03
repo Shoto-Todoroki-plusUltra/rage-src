@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabriela&family=Playwrite+IT+Moderna&family=Press+Start+2P&display=swap');
+
+.playwrite-it-moderna-regular {
+  font-family: "Playwrite IT Moderna", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body{
+  font-family: "Playwrite IT Moderna", cursive;
+}
+
+:root {
+  --cyber-pink: #FF69B4;
+  --cyber-pink-light: #FFB6C1;
+  --cyber-pink-dark: #DB7093;
+  --deep-space: #0A1828;
+}
+
+.custom-cursor {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 32 32'%3E%3Ctext y='20'%3E💅🏻%3C/text%3E%3C/svg%3E"), auto;
+}
+
+body {
+  background: var(--deep-space);
+}
+
+/* Color shifting animation for text */
+.neon-text, .cyber-title, .processing-text, .terminal-text, .terminal-prompt {
+  animation: pinkShift 8s infinite;
+}
+
+@keyframes pinkShift {
+  0% { color: #FF69B4; }
+  25% { color: #FFB6C1; }
+  50% { color: #DB7093; }
+  75% { color: #FF1493; }
+  100% { color: #FF69B4; }
+}
+
+/* Replace all instances of cyber-teal with these pink colors */
+.document-glow, .loading-dots .dot {
+  border-color: var(--cyber-pink);
+  background: var(--cyber-pink);
+  animation: pinkShift 8s infinite;
+}
+
+.cyber-title::after, .upload-box:hover {
+  background: var(--cyber-pink);
+  border-color: var(--cyber-pink);
+  box-shadow: 0 8px 24px rgba(255, 105, 180, 0.1);
+  animation: pinkBorderShift 8s infinite;
+}
+
+@keyframes pinkBorderShift {
+  0% { border-color: #FF69B4; }
+  25% { border-color: #FFB6C1; }
+  50% { border-color: #DB7093; }
+  75% { border-color: #FF1493; }
+  100% { border-color: #FF69B4; }
+}
+
+.upload-icon {
+  color: var(--cyber-pink);
+  animation: pinkShift 8s infinite;
+}
